@@ -1,8 +1,0 @@
-- name: 'Set up COGIP site'
-  hosts: default
-  roles:
-    - system
-    #- db
-#    - php
-    #- nginx
-##    - tailscale
