@@ -1,0 +1,50 @@
+---
+- hosts: provision
+  connection: local
+  gather_facts: False
+
+  vars_files:
+    - vm_provision.yml
+    - secrets.yml
+
+  tasks:
+    - name: Create a virtual machine on given ESXi hostname
+      community.vmware.vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "BeCentral"
+        validate_certs: false
+        folder: "{{ vm_folder }}"
+        name: "{{ vm_name }}" 
+        state: poweredon
+        template: "{{ vm_template }}"
+        esxi_hostname: "{{ esxi_hostname }}"
+        disk:
+        - size_gb: "{{ vm_disk_size }}"
+          type: thin
+          datastore: "{{ vm_datastore }}"
+        hardware:
+          memory_reservation_lock: "{{ vm_memory_reservation_lock }}"
+          hotadd_memory: "{{ vm_hotadd_memory }}"
+          nested_virt: "{{ vm_nested_virt }}"
+          hotremove_cpu: "{{ vm_hotremove_cpu }}"
+          hotadd_cpu: "{{ vm_hotadd_cpu }}"
+          memory_mb: "{{ vm_memory }}"
+          num_cpus: "{{ vm_num_cpus}}"
+        networks:
+        - name: "{{ vm_network }}" 
+          wait_for_ip_address: true
+          wait_for_ip_address_timeout: 600
+        customization:
+          hostname: '{{ vm_name }}'
+      delegate_to: localhost
+      register: deploy_vm
+
+    - name: Add new host to inventory.
+      add_host:
+        name: "{{ vm_name }}"
+        hostname: "{{ vm_name }}"
+        ansible_ssh_private_key_file: "{{ deploy_user_ssh_key_file }}"
+      when: deploy_vm.changed
+

@@ -1,0 +1,27 @@
+# User Role
+
+system_user: ewan
+system_user_uid: 1001
+system_user_ssh_public_key: "https://github.com/eagle-251.keys"
+
+# Chezmoi Variables
+
+dotfiles_repo: "https://git.gilchrist.scot/ewan/dotfiles.git" 
+
+# Security
+
+security_sudoers_passwordless:
+  - "{{ system_user }}"
+  - ansible
+
+# Firewall
+
+firewall_allowed_tcp_ports:
+  - "22"
+  - "25"
+  - "80"
+  - "443"
+
+# Docker
+
+docker_users: "{{ system_user }}"

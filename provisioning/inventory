@@ -1,0 +1,8 @@
+[provision]
+localhost
+
+[prod]
+vmsdt-gilchrist-clone ansible_ssh_user=ansible
+
+[dev]
+dev.test

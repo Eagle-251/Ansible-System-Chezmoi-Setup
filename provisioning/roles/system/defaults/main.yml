@@ -1,0 +1,2 @@
+system_docker_package_name: 'docker-ce'
+system_arch: '{{ ansible_architecture }}'

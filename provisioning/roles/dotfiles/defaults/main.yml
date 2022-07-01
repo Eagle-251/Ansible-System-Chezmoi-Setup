@@ -1,0 +1,15 @@
+user_home_dir: "/home/{{ system_user }}"
+user_local_bin: "{{ user_home_dir }}/{{ user_local_bin_dir }}"
+user_local_bin_dir: ".local/bin"
+user_local_bin_mode: "0755"
+
+chezmoi_script_url: "https://chezmoi.io/get"
+chezmoi_script_dest: "{{ user_home_dir }}/chezmoi.sh"
+chezmoi_script_mode: "0700" 
+#chezmoi_script: "{{ role_path }}/files/chezmoi.sh"
+#chezmoi_executable: "{{ user_local_bin }}"  
+chezmoi_dotfiles_source: ".local/share/chezmoi"
+
+
+dotfiles_repo: ""
+system_user: ""

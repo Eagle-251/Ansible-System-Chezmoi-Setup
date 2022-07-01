@@ -1,0 +1,16 @@
+---
+
+- name: Create User
+  user:
+    name: "{{ system_user }}"
+    uid: "{{ system_user_uid }}"
+    groups: "{{ system_user_additional_groups }}"
+    append: true
+    password: "{{ system_user_password | password_hash('sha512') }}"
+    state: present
+
+- name: Add SSH key to user's authorized keys
+  authorized_key:
+    user: "{{ system_user }}"
+    state: present
+    key: "{{ system_user_ssh_public_key }}"

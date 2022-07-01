@@ -1,0 +1,10 @@
+---
+- hosts: prod
+  become: true
+
+  roles:
+    - geerlingguy.security
+    - geerlingguy.firewall
+    - geerlingguy.docker
+    - user
+    - dotfiles

@@ -1,0 +1,21 @@
+---
+# Cluster Host Vars
+
+# Guest VM Vars
+vm_name: vmsdt-gilchrist-clone
+vm_folder: "LoveLace 8" 
+vm_template: "BeCentral/vm/Templates/template-debian-10"
+
+# Hardware
+vm_disk_size: 20 
+vm_datastore: "datastore4"
+vm_memory_reservation_lock: true
+vm_nested_virt: true
+vm_hotadd_memory: true
+vm_hotadd_cpu: true
+vm_hotadd_memory: true
+vm_memory: 2048
+vm_num_cpus: 2
+vm_network: "LAN"
+vm_hotremove_cpu: true
+

@@ -1,0 +1,53 @@
+---
+
+- name: Ensure User local bin folder exists
+  file: 
+    path: "{{ user_local_bin }}"
+    state: directory
+    mode: "{{ user_local_bin_mode }}"
+    owner: "{{ system_user }}"
+    group: "{{ system_user }}"
+    recurse: yes
+
+- name: Get chezmoi install script
+  get_url:
+    url: "{{ chezmoi_script_url }}"
+    dest: "{{ chezmoi_script_dest }}"    
+    mode: "{{ chezmoi_script_mode }}"
+
+- name: Run Chezmoi Install Script
+  command:
+    cmd: "{{ chezmoi_script_dest }} -b {{ user_local_bin }}"
+    creates: "{{ user_local_bin }}/chezmoi"
+
+#- name: Run chezmoi install script
+  #script: "{{ chezmoi_script }} -d {{ user_local_bin }}"
+  #args:
+    #creates: "{{ user_local_bin }}"
+
+- name: Ensure chezmoi executable had correct permissions
+  file:
+    path: "{{ user_local_bin }}/chezmoi"
+    owner: "{{ system_user }}"
+    group: "{{ system_user }}"
+    mode: "0744"
+
+- name: Clone dotfiles
+  become: yes
+  become_user: "{{ system_user }}"
+  git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ user_home_dir }}/{{ chezmoi_dotfiles_source }}"
+    clone: yes
+    update: yes
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Apply changes
+  become: yes
+  become_user: "{{ system_user }}"
+  command: 
+    cmd: "{{ user_local_bin }}/chezmoi apply"
+

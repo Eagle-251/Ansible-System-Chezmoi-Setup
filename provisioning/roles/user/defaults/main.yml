@@ -1,0 +1,5 @@
+system_user_additional_groups: sudo,docker
+system_user_uid: 1000
+system_user: ""
+system_user_ssh_public_key: ""
+system_user_password: ""
