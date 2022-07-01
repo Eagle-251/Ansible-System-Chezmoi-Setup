@@ -10,7 +10,7 @@ A suggested Vagrantfile is also included for testing
 
 ### Requirements
 
-The [deploy](provision/deploy) playbook uses three Ansible Galaxy roles from Jeff Geerling to bootstrap the server:
+The [deploy](provisioning/deploy.yml) playbook uses three Ansible Galaxy roles from Jeff Geerling to bootstrap the server:
 - [Firewall](https://galaxy.ansible.com/geerlingguy/firewall)
 - [Security](https://galaxy.ansible.com/geerlingguy/security)
 - [Docker](https://galaxy.ansible.com/geerlingguy/docker)
