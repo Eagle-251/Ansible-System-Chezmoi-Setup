@@ -1,3 +1,14 @@
+# Tailscale Vars
+
+tailscale_args: "--accept-routes=false --accept-dns=false"
+
+# Provision Host Vars
+
+
+vm_name: vmsdt-gilchrist-clone
+vm_folder: "LoveLace 8" 
+vm_template: "BeCentral/vm/Templates/template-debian-10"
+vm_datacenter: "BeCentral"
 # User Role
 
 system_user: ewan
