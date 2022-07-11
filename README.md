@@ -15,6 +15,7 @@ The [deploy](provisioning/deploy.yml) playbook uses some Ansible Galaxy roles to
 - [Security](https://galaxy.ansible.com/geerlingguy/security)
 - [Docker](https://galaxy.ansible.com/geerlingguy/docker)
 - [Tailscale](https://galaxy.ansible.com/artis3n/tailscale)
+
 These must be installed with `ansible-galaxy install <name_of_role>` before running the playbook.
 
 ### Variables 
